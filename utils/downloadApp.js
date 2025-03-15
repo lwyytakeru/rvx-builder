@@ -13,12 +13,16 @@ async function downloadApp(ws) {
   const { version, arch } = global.apkInfo;
   const apkMirrorVersionArg = version.replace(/\./g, '-');
   const link = global.jarNames.selectedApp.link;
+  const url = `https://www.apkmirror.com${link}${link.split('/')[3]}-${apkMirrorVersionArg}-release/`
 
-  let versionDownload = await fetchWithUserAgent(
-    `https://www.apkmirror.com${link}${
-      link.split('/')[3]
-    }-${apkMirrorVersionArg}-release/`
-  );
+  let versionDownload = await fetchWithUserAgent(url);
+
+  if (
+    !versionDownload.ok &&
+    global.jarNames.selectedApp.packageName === 'com.twitter.android'
+  ) {
+    versionDownload = await fetchWithUserAgent(url.replace('/twitter/twitter', '/twitter/x-previously-twitter'));
+  }
 
   if (!versionDownload.ok) {
     ws.send(

@@ -196,14 +196,27 @@ module.exports = async function getAppVersion(ws, message) {
   const regex = new RegExp(
     `(?<=${link}${link.split('/')[3]}-)(.*)(?=-release/)`
   );
-
+  const regexTwitter = new RegExp(
+    `(?<=/apk/x-corp/twitter/x-previously-twitter-)(.*)(?=-release/)`
+  );
   for (const version of $(
     '#primary h5.appRowTitle.wrapText.marginZero.block-on-mobile'
   ).get()) {
     const versionTitle = version.attribs.title.toLowerCase();
-    const versionName = version.children[0].next.attribs.href
-      .match(regex)[0]
-      .replace(/-/g, '.');
+    const versionNameRaw = version.children[0].next.attribs.href;
+    const versionNameMatch = versionNameRaw.match(regex);
+    let versionName;
+    if (global.jarNames.selectedApp.packageName === 'com.twitter.android' &&
+        versionNameMatch === null
+    ) {
+      versionName = versionNameRaw
+        .match(regexTwitter)[0]
+        .replace(/-/g, '.');
+	} else {
+      versionName = versionNameRaw
+        .match(regex)[0]
+        .replace(/-/g, '.');
+	}
 
     if (
       (global.jarNames.selectedApp.packageName === 'com.twitter.android' &&

@@ -695,8 +695,8 @@ ws.onmessage = (msg) => {
     case 'appList': {
       let id = 0;
       for (const app of message.list) {
-        const appName = app.appName.replace(' (Wear OS)', '');
-        const link = app.link.replace('-wear-os', '');
+        const appName = app.appName.replace(' (Wear OS)', '').replace(' (Android Automotive)', '');
+        const link = app.link.replace('-wear-os', '').replace('-android-automotive', '');
         document.getElementById('appList').innerHTML += `
               <li>
                 <input
