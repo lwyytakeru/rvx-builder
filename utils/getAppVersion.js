@@ -16,7 +16,7 @@ async function getAppVersion_(pkgName, ws, shouldReturnMsg, deviceId) {
       process.platform !== 'android'
         ? `adb -s ${deviceId} shell dumpsys package ${pkgName}`
         : `su -c dumpsys package ${pkgName}`,
-      { maxBuffer: 10240 * 1024 }
+      { maxBuffer: 1024 * 1024 * 10 }
     );
     const dumpSysOut = stdout || stderr;
 

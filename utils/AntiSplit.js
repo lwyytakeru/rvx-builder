@@ -24,7 +24,8 @@ async function antiSplit(inputPath, outputPath, websocket) {
   );
 
   await exec(
-    `${global.javaCmd} -jar "${global.jarNames.apkEditor}" m -i "${inputPath}" -o "${outputPath}"`
+    `${global.javaCmd} -jar "${global.jarNames.apkEditor}" m -i "${inputPath}" -o "${outputPath}"`,
+	{ maxBuffer: 1024 * 1024 * 10 }
   );
 }
 
