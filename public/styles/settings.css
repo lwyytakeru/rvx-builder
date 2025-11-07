@@ -41,7 +41,23 @@ p {
   margin-bottom: 15px;
 }
 
+#set-sources-rvx-dev {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 12px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
 #set-sources-rvx-anddea {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 12px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+#set-sources-rvx-anddea-dev {
   display: flex;
   flex-wrap: wrap;
   padding: 12px;
@@ -57,12 +73,32 @@ p {
   margin-bottom: 15px;
 }
 
+#set-sources-revanced-dev {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 12px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
 #set-sources-piko {
   display: flex;
   flex-wrap: wrap;
   padding: 12px;
   margin-right: 15px;
   margin-bottom: 15px;
+}
+
+#set-sources-piko-dev {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 12px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+#set-sources-rvx-arsclib {
+  display: none;
 }
 
 #set-sources-update {
@@ -74,10 +110,6 @@ p {
 }
 
 #integrations-src {
-  display: none;
-}
-
-#pre-releases {
   display: none;
 }
 

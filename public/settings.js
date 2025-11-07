@@ -6,14 +6,14 @@ if (localStorage.getItem('auto-next')) {
 if (localStorage.getItem('black-theme')) {
   document.getElementById('blackBtn').checked = true;
 }
-if (localStorage.getItem('pre-releases')) {
-  document.getElementById('preReleasesBtn').checked = true;
-}
 if (localStorage.getItem('rip-libs')) {
   document.getElementById('ripLibsBtn').checked = true;
 }
 if (localStorage.getItem('universal-patches')) {
   document.getElementById('universalPatchesBtn').checked = true;
+}
+if (localStorage.getItem('arsclib')) {
+  document.getElementById('ARSCLibBtn').checked = true;
 }
 
 accentColors.forEach((color) => {
@@ -48,14 +48,6 @@ document.getElementById('blackBtn').addEventListener('click', function () {
     dElement.classList.add('black');
   }
 });
-document.getElementById('preReleasesBtn').addEventListener('click', function () {
-  if (localStorage.getItem('pre-releases')) {
-    localStorage.removeItem('pre-releases');
-  } else {
-    localStorage.setItem('pre-releases', true);
-  }
-  document.getElementById('set-sources-update').click();
-});
 document.getElementById('ripLibsBtn').addEventListener('click', function () {
   if (localStorage.getItem('rip-libs')) {
     localStorage.removeItem('rip-libs');
@@ -68,5 +60,14 @@ document.getElementById('universalPatchesBtn').addEventListener('click', functio
     localStorage.removeItem('universal-patches');
   } else {
     localStorage.setItem('universal-patches', true);
+  }
+});
+document.getElementById('ARSCLibBtn').addEventListener('click', function () {
+  if (localStorage.getItem('arsclib')) {
+    localStorage.removeItem('arsclib');
+    document.getElementById('set-sources-rvx').click();
+  } else {
+    localStorage.setItem('arsclib', true);
+    document.getElementById('set-sources-rvx-arsclib').click();
   }
 });

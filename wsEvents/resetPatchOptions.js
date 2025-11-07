@@ -1,3 +1,4 @@
+const { existsSync } = require('node:fs');
 const exec = require('../utils/promisifiedExec.js');
 
 /**
@@ -11,4 +12,10 @@ module.exports = async function resetPatchOptions(ws) {
   await exec(
     `${java} -jar "${cli}" options --overwrite "${patches}"`
   );
+
+  if (!existsSync('options.json')) {
+    await exec(
+      `${java} -jar "${cli}" options --overwrite -b "${patches}"`
+    );
+  }
 };

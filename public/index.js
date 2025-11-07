@@ -179,7 +179,11 @@ function getAppVersions(isRooted, page = 1) {
 }
 
 function buildReVanced() {
-  sendCommand({ event: 'patchApp', ripLibs: localStorage.getItem('rip-libs') });
+  if (localStorage.getItem('arsclib')) {
+    sendCommand({ event: 'patchAppArscLib' });
+  } else {
+    sendCommand({ event: 'patchApp', ripLibs: localStorage.getItem('rip-libs') });
+  }
 }
 
 function getAlreadyExists() {
@@ -265,7 +269,14 @@ function resetPatchOptions() {
 
 function resetSettings() {
   sendCommand({ event: 'resetSettings' });
+  disableARSCLib();
   setSourcesRVX();
+}
+
+function disableARSCLib() {
+  if (localStorage.getItem('arsclib')) {
+    document.getElementById('ARSCLibBtn').click();
+  }
 }
 
 function setSources() {
@@ -274,6 +285,7 @@ function setSources() {
   const cli = `${cliOrg}/${cliSrc}`;
 
   const cli4 = document.getElementById('cli4').value;
+  const prereleases = document.getElementById('pre-releases').value;
 
   const patchesOrg = document.getElementById('patch-org').value;
   const patchesSrc = document.getElementById('patch-src').value;
@@ -286,8 +298,6 @@ function setSources() {
   const microgOrg = document.getElementById('microg-org').value;
   const microgSrc = document.getElementById('microg-src').value;
   const microg = `${microgOrg}/${microgSrc}`;
-
-  const prereleases = localStorage.getItem('pre-releases') + '';
 
   sendCommand({
     event: 'setSettings',
@@ -302,11 +312,17 @@ function setSources() {
   });
 }
 
+function disableARSCLibBeforeSetSources() {
+  disableARSCLib();
+  setSources();
+}
+
 function setSourcesRVX() {
   document.getElementById('cli-org').value = 'inotia00';
   document.getElementById('cli-src').value = 'revanced-cli';
 
   document.getElementById('cli4').value = 'false';
+  document.getElementById('pre-releases').value = 'false';
 
   document.getElementById('patch-org').value = 'inotia00';
   document.getElementById('patch-src').value = 'revanced-patches';
@@ -317,14 +333,34 @@ function setSourcesRVX() {
   document.getElementById('microg-org').value = 'ReVanced';
   document.getElementById('microg-src').value = 'GmsCore';
 
-  setSources();
+  disableARSCLibBeforeSetSources();
 }
 
-function setSourcesRVX_anddea() {
+function setSourcesRVXDev() {
   document.getElementById('cli-org').value = 'inotia00';
   document.getElementById('cli-src').value = 'revanced-cli';
 
   document.getElementById('cli4').value = 'false';
+  document.getElementById('pre-releases').value = 'true';
+
+  document.getElementById('patch-org').value = 'inotia00';
+  document.getElementById('patch-src').value = 'revanced-patches';
+
+  document.getElementById('integrations-org').value = 'inotia00';
+  document.getElementById('integrations-src').value = 'revanced-integrations';
+
+  document.getElementById('microg-org').value = 'ReVanced';
+  document.getElementById('microg-src').value = 'GmsCore';
+
+  disableARSCLibBeforeSetSources();
+}
+
+function setSourcesRVXAnddea() {
+  document.getElementById('cli-org').value = 'inotia00';
+  document.getElementById('cli-src').value = 'revanced-cli';
+
+  document.getElementById('cli4').value = 'false';
+  document.getElementById('pre-releases').value = 'false';
 
   document.getElementById('patch-org').value = 'anddea';
   document.getElementById('patch-src').value = 'revanced-patches';
@@ -332,7 +368,23 @@ function setSourcesRVX_anddea() {
   document.getElementById('integrations-org').value = 'anddea';
   document.getElementById('integrations-src').value = 'revanced-integrations';
 
-  setSources();
+  disableARSCLibBeforeSetSources();
+}
+
+function setSourcesRVXAnddeaDev() {
+  document.getElementById('cli-org').value = 'inotia00';
+  document.getElementById('cli-src').value = 'revanced-cli';
+
+  document.getElementById('cli4').value = 'false';
+  document.getElementById('pre-releases').value = 'true';
+
+  document.getElementById('patch-org').value = 'anddea';
+  document.getElementById('patch-src').value = 'revanced-patches';
+
+  document.getElementById('integrations-org').value = 'anddea';
+  document.getElementById('integrations-src').value = 'revanced-integrations';
+
+  disableARSCLibBeforeSetSources();
 }
 
 function setSourcesReVanced() {
@@ -340,6 +392,7 @@ function setSourcesReVanced() {
   document.getElementById('cli-src').value = 'revanced-cli';
 
   document.getElementById('cli4').value = 'false';
+  document.getElementById('pre-releases').value = 'false';
 
   document.getElementById('patch-org').value = 'revanced';
   document.getElementById('patch-src').value = 'revanced-patches';
@@ -347,7 +400,23 @@ function setSourcesReVanced() {
   document.getElementById('integrations-org').value = 'revanced';
   document.getElementById('integrations-src').value = 'revanced-integrations';
 
-  setSources();
+  disableARSCLibBeforeSetSources();
+}
+
+function setSourcesReVancedDev() {
+  document.getElementById('cli-org').value = 'inotia00';
+  document.getElementById('cli-src').value = 'revanced-cli';
+
+  document.getElementById('cli4').value = 'false';
+  document.getElementById('pre-releases').value = 'true';
+
+  document.getElementById('patch-org').value = 'revanced';
+  document.getElementById('patch-src').value = 'revanced-patches';
+
+  document.getElementById('integrations-org').value = 'revanced';
+  document.getElementById('integrations-src').value = 'revanced-integrations';
+
+  disableARSCLibBeforeSetSources();
 }
 
 function setSourcesPiko() {
@@ -355,11 +424,44 @@ function setSourcesPiko() {
   document.getElementById('cli-src').value = 'revanced-cli';
 
   document.getElementById('cli4').value = 'true';
+  document.getElementById('pre-releases').value = 'false';
 
   document.getElementById('patch-org').value = 'crimera';
   document.getElementById('patch-src').value = 'piko';
 
   document.getElementById('integrations-org').value = 'crimera';
+  document.getElementById('integrations-src').value = 'revanced-integrations';
+
+  disableARSCLibBeforeSetSources();
+}
+
+function setSourcesPikoDev() {
+  document.getElementById('cli-org').value = 'inotia00';
+  document.getElementById('cli-src').value = 'revanced-cli';
+
+  document.getElementById('cli4').value = 'false';
+  document.getElementById('pre-releases').value = 'true';
+
+  document.getElementById('patch-org').value = 'crimera';
+  document.getElementById('patch-src').value = 'piko';
+
+  document.getElementById('integrations-org').value = 'crimera';
+  document.getElementById('integrations-src').value = 'revanced-integrations';
+
+  disableARSCLibBeforeSetSources();
+}
+
+function setSourcesRVXARSCLib() {
+  document.getElementById('cli-org').value = 'inotia00';
+  document.getElementById('cli-src').value = 'revanced-cli-arsclib';
+
+  document.getElementById('cli4').value = 'true';
+  document.getElementById('pre-releases').value = 'false';
+
+  document.getElementById('patch-org').value = 'inotia00';
+  document.getElementById('patch-src').value = 'revanced-patches-arsclib';
+
+  document.getElementById('integrations-org').value = 'inotia00';
   document.getElementById('integrations-src').value = 'revanced-integrations';
 
   setSources();
@@ -733,6 +835,7 @@ ws.onmessage = (msg) => {
       const integrations = message.settings.integrations.split('/');
       const microg = message.settings.microg.split('/');
       const cli4 = message.settings.cli4 == 'true';
+      const preReleases = message.settings.prereleases == 'true';
 
       const cliOrg = document.getElementById('cli-org');
       const cliSrc = document.getElementById('cli-src');
@@ -761,12 +864,8 @@ ws.onmessage = (msg) => {
       const cli4Src = document.getElementById('cli4');
       cli4Src.value = cli4;
 
-      const preReleases = document.getElementById('pre-releases');
-      if (typeof prereleases === 'undefined') {
-          preReleases.value = 'false';
-      } else {
-          preReleases.value = prereleases;
-      }
+      const preReleasesSrc = document.getElementById('pre-releases');
+      preReleasesSrc.value = preReleases;
     }
   }
 };
