@@ -11,7 +11,7 @@ function getConsts(name) {
     case 'jreDir':
       return joinPath(
         global.revancedDir,
-        `zulu17.60.17-ca-jre17.0.16-${getConsts('platform')}_${getConsts(
+        `zulu17.62.17-ca-jre17.0.17-${getConsts('platform')}_${getConsts(
           'arch'
         )}`
       );
