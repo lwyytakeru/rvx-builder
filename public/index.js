@@ -419,6 +419,22 @@ function setSourcesReVancedDev() {
   disableARSCLibBeforeSetSources();
 }
 
+function setSourcesReVancedPatcher22Dev() {
+  document.getElementById('cli-org').value = 'inotia00';
+  document.getElementById('cli-src').value = 'revanced-cli-patcher-22';
+
+  document.getElementById('cli4').value = 'false';
+  document.getElementById('pre-releases').value = 'true';
+
+  document.getElementById('patch-org').value = 'LisoUseInAIKyrios';
+  document.getElementById('patch-src').value = 'revanced-patches';
+
+  document.getElementById('integrations-org').value = 'revanced';
+  document.getElementById('integrations-src').value = 'revanced-integrations';
+
+  disableARSCLibBeforeSetSources();
+}
+
 function setSourcesPiko() {
   document.getElementById('cli-org').value = 'inotia00';
   document.getElementById('cli-src').value = 'revanced-cli';

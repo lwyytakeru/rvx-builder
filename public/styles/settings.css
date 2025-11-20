@@ -81,6 +81,14 @@ p {
   margin-bottom: 15px;
 }
 
+#set-sources-revanced-patcher-22-dev {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 12px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
 #set-sources-piko {
   display: flex;
   flex-wrap: wrap;
