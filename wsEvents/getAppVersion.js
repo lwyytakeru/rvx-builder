@@ -199,6 +199,10 @@ module.exports = async function getAppVersion(ws, message) {
   const regexTwitter = new RegExp(
     `(?<=/apk/x-corp/twitter/x-(?:previously|formerly)-twitter-)(.*)(?=-release/)`
   );
+  const regexTwitter2 = new RegExp(
+    `(?<=/apk/x-corp/twitter/x-)(.*)(?=-release/)`
+  );
+
   for (const version of $(
     '#primary h5.appRowTitle.wrapText.marginZero.block-on-mobile'
   ).get()) {
@@ -211,8 +215,14 @@ module.exports = async function getAppVersion(ws, message) {
       versionNameMatch === null
     ) {
       const twitterVersionNameMatch = versionNameRaw.match(regexTwitter);
-      if (!twitterVersionNameMatch) continue;
-      versionName = twitterVersionNameMatch[0].replace(/-/g, '.');
+      if (twitterVersionNameMatch) {
+        versionName = twitterVersionNameMatch[0];
+      } else {
+        const twitterVersionNameMatch2 = versionNameRaw.match(regexTwitter2);
+		if (twitterVersionNameMatch2) {
+		  versionName = twitterVersionNameMatch2[0];
+		} else continue;
+      }
     } else {
       if (!versionNameMatch) continue;
       versionName = versionNameMatch[0].replace(/-/g, '.');

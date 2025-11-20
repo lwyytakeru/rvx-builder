@@ -22,12 +22,17 @@ async function downloadApp(ws) {
     global.jarNames.selectedApp.packageName === 'com.twitter.android'
   ) {
     versionDownload = await fetchWithUserAgent(
-      url.replace('/twitter/twitter', '/twitter/x-formerly-twitter')
+      url.replace('/twitter/twitter', '/twitter/x')
     );
     if (!versionDownload.ok) {
       versionDownload = await fetchWithUserAgent(
-        url.replace('/twitter/twitter', '/twitter/x-previously-twitter')
+        url.replace('/twitter/twitter', '/twitter/x-formerly-twitter')
       );
+      if (!versionDownload.ok) {
+        versionDownload = await fetchWithUserAgent(
+          url.replace('/twitter/twitter', '/twitter/x-previously-twitter')
+        );
+      }
     }
   }
 
