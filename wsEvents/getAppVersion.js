@@ -1,6 +1,5 @@
 const exec = require('../utils/promisifiedExec.js');
 
-const fetch = require('node-fetch');
 const { load } = require('cheerio');
 const semver = require('semver');
 const { join: joinPath } = require('path');
